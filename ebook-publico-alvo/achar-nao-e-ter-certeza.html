@@ -1,0 +1,2010 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Defina seu público-alvo">
+<title>Achar Não é Ter Certeza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@1,500;1,700&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & TOKENS ─────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Palette */
+  --parch:        #F4EFE4;   /* warm parchment — page background */
+  --parch-dark:   #EBE4D6;   /* dividers, subtle surfaces */
+  --parch-mid:    #DDD5C2;   /* stronger borders */
+  --offwhite:     #FAF8F4;   /* sidebar, card surfaces */
+  --ink:          #0D0B09;   /* near-black body text */
+  --ink-soft:     #2C2820;   /* headings */
+  --ink-muted:    #6A6259;   /* captions, labels */
+  --amber:        #C49A1E;   /* primary accent */
+  --amber-dark:   #8B6914;   /* hover / strong accent */
+  --amber-xdark:  #5C4210;   /* blockquote text */
+  --amber-pale:   #F0E4B8;   /* very light tint */
+  --amber-ghost:  rgba(196,154,30,0.07); /* ghost fills */
+  --cream:        #F5EDD3;   /* blockquote bg */
+
+  /* Type */
+  --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-body:    'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif:   'Playfair Display', Georgia, serif;
+  --font-mono:    'Cascadia Code', 'Fira Code', 'Courier New', monospace;
+
+  /* Layout */
+  --toc-w:        270px;
+  --content-max:  700px;
+  --r:            6px;
+  --ease:         0.18s ease;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--parch);
+  color: var(--ink);
+  line-height: 1.78;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── COVER — editorial, warm, typographic ───────────────────────────────── */
+.cover {
+  background: var(--offwhite);
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 2px solid var(--parch-dark);
+}
+
+/* Noise/grain texture overlay */
+.cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cover-nav {
+  position: relative;
+  z-index: 2;
+  padding: 28px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--parch-dark);
+}
+
+.cover-nav-brand {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  text-decoration: none;
+  border: none;
+}
+
+.cover-nav-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+}
+
+.cover-body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  padding: 60px 48px 60px;
+}
+
+/* Huge ghost numeral */
+.cover-ghost {
+  position: absolute;
+  right: -0.05em;
+  bottom: -0.15em;
+  font-family: var(--font-display);
+  font-size: clamp(240px, 32vw, 420px);
+  font-weight: 800;
+  color: var(--parch-dark);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1;
+  letter-spacing: -0.05em;
+}
+
+.cover-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+}
+
+.cover-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.cover-eyebrow-rule {
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--amber);
+  border-radius: 1px;
+}
+
+.cover-eyebrow-text {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.cover-title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 6.5vw, 72px);
+  font-weight: 800;
+  color: var(--ink-soft);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+
+/* Italic serif accent on the last word or emphasized text */
+.cover-title em {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--amber-dark);
+}
+
+.cover-subtitle {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink-muted);
+  letter-spacing: 0.01em;
+  line-height: 1.55;
+  margin-bottom: 48px;
+  max-width: 440px;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid var(--parch-mid);
+  padding-top: 24px;
+  flex-wrap: wrap;
+}
+
+.cover-meta-item {
+  padding-right: 32px;
+  margin-right: 32px;
+  border-right: 1px solid var(--parch-mid);
+}
+
+.cover-meta-item:last-child {
+  border-right: none;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.cover-meta-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 3px;
+}
+
+.cover-meta-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.cover-footer {
+  position: relative;
+  z-index: 2;
+  padding: 20px 48px;
+  border-top: 1px solid var(--parch-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cover-footer-note {
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+}
+
+.cover-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink-soft);
+  color: var(--offwhite);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 2px;
+  text-decoration: none;
+  border: none;
+  transition: background var(--ease);
+}
+
+.cover-cta:hover { background: var(--amber-dark); color: var(--offwhite); border: none; }
+
+.cover-cta-arrow {
+  display: inline-block;
+  font-style: normal;
+  transition: transform var(--ease);
+}
+
+.cover-cta:hover .cover-cta-arrow { transform: translateX(3px); }
+
+/* ── LAYOUT ─────────────────────────────────────────────────────────────── */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  align-items: flex-start;
+}
+
+/* ── SIDEBAR TOC ─────────────────────────────────────────────────────────── */
+.toc-sidebar {
+  width: var(--toc-w);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--offwhite);
+  border-right: 1px solid var(--parch-dark);
+  padding: 40px 0;
+  transition: transform var(--ease);
+  scrollbar-width: thin;
+  scrollbar-color: var(--parch-mid) transparent;
+}
+
+.toc-sidebar::-webkit-scrollbar { width: 3px; }
+.toc-sidebar::-webkit-scrollbar-thumb { background: var(--parch-mid); border-radius: 2px; }
+
+.toc-head {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid var(--parch-dark);
+  margin-bottom: 24px;
+}
+
+.toc-head-title {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+.toc-head-author {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--ink-muted);
+  margin-top: 4px;
+  letter-spacing: 0.03em;
+}
+
+.toc-section-label {
+  padding: 0 24px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 10px;
+}
+
+#TOC ul { list-style: none; padding: 0; }
+#TOC ul ul { margin-left: 0; }
+#TOC li { margin: 0; }
+
+#TOC a {
+  display: block;
+  padding: 6px 24px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  text-decoration: none;
+  border: none;
+  line-height: 1.5;
+  border-left: 2px solid transparent;
+  transition: all var(--ease);
+}
+
+#TOC a:hover,
+#TOC a.active {
+  color: var(--ink-soft);
+  border-left-color: var(--amber);
+  background: var(--amber-ghost);
+  padding-left: 28px;
+}
+
+#TOC ul ul a {
+  padding-left: 36px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--parch-mid);
+}
+
+#TOC ul ul a:hover { padding-left: 40px; color: var(--ink-muted); }
+
+/* ── MOBILE TOGGLE ───────────────────────────────────────────────────────── */
+.toc-toggle {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 200;
+  width: 48px;
+  height: 48px;
+  background: var(--ink-soft);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(13,11,9,0.25);
+  transition: transform var(--ease), background var(--ease);
+}
+
+.toc-toggle:hover { transform: scale(1.06); background: var(--amber-dark); }
+.toc-toggle svg { width: 18px; height: 18px; stroke: var(--offwhite); fill: none; stroke-width: 2; }
+
+.toc-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(13,11,9,0.55);
+  z-index: 150;
+  opacity: 0;
+  transition: opacity var(--ease);
+  backdrop-filter: blur(2px);
+}
+
+.toc-overlay.visible { opacity: 1; }
+
+/* ── MAIN CONTENT ────────────────────────────────────────────────────────── */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 72px 56px 96px;
+  max-width: calc(var(--content-max) + 112px);
+}
+
+/* ── CHAPTER SECTIONS ────────────────────────────────────────────────────── */
+body { counter-reset: chap; }
+
+section.level1 {
+  counter-increment: chap;
+  position: relative;
+  margin-bottom: 80px;
+  padding-bottom: 56px;
+}
+
+section.level1::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: var(--parch-mid);
+  margin-top: 56px;
+}
+
+section.level1:last-child::after { display: none; }
+
+/* Ghost chapter number — sits behind the heading */
+section.level1::before {
+  content: counter(chap, decimal-leading-zero);
+  position: absolute;
+  top: -32px;
+  right: -32px;
+  font-family: var(--font-display);
+  font-size: clamp(100px, 16vw, 160px);
+  font-weight: 800;
+  color: var(--parch-dark);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  letter-spacing: -0.04em;
+}
+
+/* ── H1 — CHAPTER TITLE: huge, bold, editorial ───────────────────────────── */
+section.level1 > h1 {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4.5vw, 46px);
+  font-weight: 800;
+  color: var(--ink-soft);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin-bottom: 28px;
+}
+
+/* Amber overline above H1 */
+section.level1 > h1::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 3px;
+  background: var(--amber);
+  border-radius: 2px;
+  margin-bottom: 18px;
+}
+
+/* ── H2 ──────────────────────────────────────────────────────────────────── */
+h2 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  line-height: 1.35;
+  margin-top: 44px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+h2::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: var(--amber);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+/* ── H3 ──────────────────────────────────────────────────────────────────── */
+h3 {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber-dark);
+  margin-top: 28px;
+  margin-bottom: 10px;
+}
+
+/* ── BODY TEXT ───────────────────────────────────────────────────────────── */
+p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink);
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+
+strong { color: var(--ink-soft); font-weight: 700; }
+
+em { font-style: italic; }
+
+/* ── BLOCKQUOTE — editorial pull-quote ───────────────────────────────────── */
+blockquote {
+  position: relative;
+  background: var(--cream);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 20px 24px 20px 22px;
+  margin: 28px 0;
+}
+
+blockquote p {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--amber-xdark);
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+
+blockquote p:not(:last-child) { margin-bottom: 10px; }
+
+blockquote p strong {
+  font-style: normal;
+  color: var(--amber-dark);
+  font-weight: 700;
+}
+
+/* "Dica:" label inside blockquote */
+blockquote p strong:first-child {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: block;
+  color: var(--amber-dark);
+  margin-bottom: 8px;
+  font-style: normal;
+}
+
+/* ── RESUMO RÁPIDO — inline summary boxes ────────────────────────────────── */
+p:has(strong:first-child) {
+  background: var(--offwhite);
+  border: 1px solid var(--parch-dark);
+  border-left: 3px solid var(--amber-dark);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 14px 18px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+/* ── HR ──────────────────────────────────────────────────────────────────── */
+hr {
+  border: none;
+  height: 1px;
+  background: var(--parch-dark);
+  margin: 36px 0;
+}
+
+/* ── TABLES ──────────────────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 28px 0;
+  font-size: 14px;
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1px solid var(--parch-dark);
+}
+
+thead tr {
+  background: var(--parch-dark);
+  border-bottom: 2px solid var(--amber);
+}
+
+th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber-dark);
+}
+
+td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--parch-dark);
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) { background: rgba(244,239,228,0.5); }
+tbody tr:hover { background: var(--amber-ghost); }
+
+/* ── CODE ────────────────────────────────────────────────────────────────── */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.84em;
+  background: var(--parch-dark);
+  color: var(--amber-xdark);
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+
+pre {
+  background: var(--ink-soft);
+  border-radius: var(--r);
+  padding: 22px 24px;
+  overflow-x: auto;
+  margin: 22px 0;
+  line-height: 1.6;
+  border: 1px solid rgba(13,11,9,0.08);
+}
+
+pre code {
+  background: none;
+  color: var(--amber-pale);
+  font-size: 13px;
+  padding: 0;
+}
+
+/* ── LISTS ───────────────────────────────────────────────────────────────── */
+ul, ol {
+  padding-left: 0;
+  margin: 14px 0 18px;
+}
+
+li {
+  font-size: 16px;
+  line-height: 1.78;
+  color: var(--ink);
+  margin-bottom: 6px;
+  padding-left: 22px;
+  position: relative;
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 11px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--amber);
+}
+
+ol { counter-reset: ol-ctr; }
+ol li { counter-increment: ol-ctr; }
+ol li::before {
+  content: counter(ol-ctr) ".";
+  position: absolute;
+  left: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--amber);
+  top: 3px;
+}
+
+/* ── LINKS ───────────────────────────────────────────────────────────────── */
+a {
+  color: var(--amber-dark);
+  text-decoration: none;
+  border-bottom: 1px solid var(--amber-pale);
+  transition: border-color var(--ease), color var(--ease);
+}
+
+a:hover {
+  color: var(--amber);
+  border-bottom-color: var(--amber);
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────────────────── */
+.site-footer {
+  background: var(--ink-soft);
+  padding: 36px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.site-footer-brand {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--offwhite);
+  letter-spacing: -0.01em;
+}
+
+.site-footer-brand em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--amber-pale);
+  font-weight: 700;
+}
+
+.site-footer-note {
+  font-size: 11px;
+  color: rgba(250,248,244,0.35);
+  letter-spacing: 0.05em;
+}
+
+/* ── PROGRESS BAR ────────────────────────────────────────────────────────── */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--amber);
+  width: 0%;
+  z-index: 500;
+  transition: width 0.1s linear;
+}
+
+/* ── SCROLL OFFSET ───────────────────────────────────────────────────────── */
+section[id] { scroll-margin-top: 24px; }
+
+/* ── RESPONSIVE — TABLET ─────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  :root { --toc-w: 230px; }
+  .main-content { padding: 56px 40px 80px; }
+  .cover-body { padding: 56px 40px 56px; }
+  .cover-nav, .cover-footer { padding-left: 40px; padding-right: 40px; }
+}
+
+/* ── RESPONSIVE — MOBILE ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .toc-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 160;
+    height: 100vh;
+    transform: translateX(-100%);
+    width: min(var(--toc-w), 85vw);
+  }
+
+  .toc-sidebar.open { transform: translateX(0); }
+  .toc-toggle { display: flex; }
+  .toc-overlay { display: block; }
+
+  .layout { display: block; }
+
+  .main-content {
+    padding: 44px 22px 72px;
+    max-width: 100%;
+  }
+
+  .cover {
+    grid-template-rows: auto 1fr auto;
+    min-height: 100svh;
+  }
+
+  .cover-nav { padding: 20px 22px; }
+  .cover-body { padding: 44px 22px 44px; }
+  .cover-footer { padding: 16px 22px; flex-direction: column; align-items: flex-start; gap: 12px; }
+
+  .cover-title { font-size: clamp(32px, 9vw, 52px); }
+  .cover-ghost { font-size: clamp(160px, 38vw, 260px); }
+
+  .cover-meta { gap: 0; }
+  .cover-meta-item { padding-right: 20px; margin-right: 20px; }
+
+  section.level1::before {
+    font-size: clamp(80px, 20vw, 120px);
+    top: -16px;
+    right: -12px;
+  }
+
+  section.level1 > h1 { font-size: clamp(26px, 7vw, 36px); }
+
+  h2 { font-size: 16px; margin-top: 32px; }
+  p, li { font-size: 15px; }
+  table { font-size: 13px; display: block; overflow-x: auto; }
+  .site-footer { padding: 28px 22px; }
+}
+
+@media (max-width: 380px) {
+  .main-content { padding: 36px 16px 64px; }
+  .cover-body { padding: 36px 16px; }
+}
+
+/* ── PRINT ───────────────────────────────────────────────────────────────── */
+@media print {
+  .toc-sidebar, .toc-toggle, .toc-overlay, .progress-bar { display: none !important; }
+  .layout { display: block; }
+  .main-content { padding: 0; max-width: 100%; }
+  .cover { min-height: auto; page-break-after: always; }
+  .cover-ghost { display: none; }
+  section.level1 { page-break-before: always; }
+  section.level1::before { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- ── COVER ──────────────────────────────────────────────────────────────── -->
+<section class="cover">
+  <div class="cover-nav">
+    <span class="cover-nav-brand">Achar Não é Ter Certeza</span>
+    <span class="cover-nav-tag">E-book · Público-Alvo</span>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-ghost" aria-hidden="true">7</div>
+    <div class="cover-inner">
+      <div class="cover-eyebrow">
+        <span class="cover-eyebrow-rule"></span>
+        <span class="cover-eyebrow-text">Guia Prático</span>
+      </div>
+      <h1 class="cover-title">Achar Não é Ter Certeza</h1>
+      <p class="cover-subtitle">Defina seu público-alvo</p>
+      <div class="cover-meta">
+                <div class="cover-meta-item">
+          <div class="cover-meta-label">Autor</div>
+          <div class="cover-meta-value">Jean Victor Paradella</div>
+        </div>
+                <div class="cover-meta-item">
+          <div class="cover-meta-label">Práticas</div>
+          <div class="cover-meta-value">7 capítulos</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">Categoria</div>
+          <div class="cover-meta-value">Marketing &amp; Negócios</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <span class="cover-footer-note">Jean Victor Paradella · 2026</span>
+    <a href="#main-content" class="cover-cta">
+      Começar a leitura <span class="cover-cta-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── LAYOUT ─────────────────────────────────────────────────────────────── -->
+<div class="layout">
+
+  <!-- Sidebar TOC -->
+  <nav class="toc-sidebar" id="toc-sidebar">
+    <div class="toc-head">
+      <div class="toc-head-title">Achar Não é Ter Certeza</div>
+      <div class="toc-head-author">Jean Victor Paradella</div>
+    </div>
+    <div class="toc-section-label">Sumário</div>
+        <ul>
+        <li><a href="#sobre-este-e-book"
+        id="toc-sobre-este-e-book">Sobre este e-book</a></li>
+        <li><a href="#introdução-achar-não-é-ter-certeza"
+        id="toc-introdução-achar-não-é-ter-certeza">Introdução: Achar
+        não é ter certeza</a>
+        <ul>
+        <li><a href="#seu-negócio-não-cresce-baseado-em-acho-que"
+        id="toc-seu-negócio-não-cresce-baseado-em-acho-que">Seu negócio
+        não cresce baseado em “acho que”</a></li>
+        <li><a href="#o-que-vem-pela-frente"
+        id="toc-o-que-vem-pela-frente">O que vem pela frente</a></li>
+        </ul></li>
+        <li><a href="#observe-as-perguntas-que-mais-se-repetem"
+        id="toc-observe-as-perguntas-que-mais-se-repetem">Observe as
+        perguntas que mais se repetem</a>
+        <ul>
+        <li><a
+        href="#curioso-vs.-interessado-eles-se-parecem-mas-são-bem-diferentes"
+        id="toc-curioso-vs.-interessado-eles-se-parecem-mas-são-bem-diferentes">Curioso
+        vs. interessado: eles se parecem, mas são bem
+        diferentes</a></li>
+        <li><a href="#o-que-as-perguntas-revelam"
+        id="toc-o-que-as-perguntas-revelam">O que as perguntas
+        revelam</a></li>
+        <li><a href="#como-tirar-dúvidas-além-da-comunicação-verbal"
+        id="toc-como-tirar-dúvidas-além-da-comunicação-verbal">Como
+        tirar dúvidas além da comunicação verbal?</a></li>
+        </ul></li>
+        <li><a href="#identifique-quem-realmente-compra-de-você"
+        id="toc-identifique-quem-realmente-compra-de-você">Identifique
+        quem realmente compra de você</a>
+        <ul>
+        <li><a href="#quem-é-uma-pessoa-interessada-no-seu-produto"
+        id="toc-quem-é-uma-pessoa-interessada-no-seu-produto">Quem é uma
+        pessoa interessada no seu produto?</a></li>
+        <li><a href="#como-você-identifica-que-tem-pessoas-interessadas"
+        id="toc-como-você-identifica-que-tem-pessoas-interessadas">Como
+        você identifica que tem pessoas interessadas?</a></li>
+        <li><a href="#o-que-fazer-com-isso"
+        id="toc-o-que-fazer-com-isso">O que fazer com isso</a></li>
+        </ul></li>
+        <li><a href="#escute-os-elogios-com-atenção"
+        id="toc-escute-os-elogios-com-atenção">Escute os elogios com
+        atenção</a>
+        <ul>
+        <li><a href="#mas-a-vida-é-corrida"
+        id="toc-mas-a-vida-é-corrida">Mas a vida é corrida</a></li>
+        <li><a href="#o-que-os-elogios-revelam"
+        id="toc-o-que-os-elogios-revelam">O que os elogios
+        revelam</a></li>
+        <li><a href="#o-exemplo-do-roxinho"
+        id="toc-o-exemplo-do-roxinho">O exemplo do roxinho</a></li>
+        <li><a href="#o-que-fazer" id="toc-o-que-fazer">O que
+        fazer</a></li>
+        </ul></li>
+        <li><a href="#preste-atenção-nas-objeções"
+        id="toc-preste-atenção-nas-objeções">Preste atenção nas
+        objeções</a>
+        <ul>
+        <li><a href="#seu-produto-está-no-lugar-certo"
+        id="toc-seu-produto-está-no-lugar-certo">Seu produto está no
+        lugar certo?</a></li>
+        <li><a href="#o-consultório-de-estética"
+        id="toc-o-consultório-de-estética">O consultório de
+        estética</a></li>
+        <li><a href="#as-objeções-mais-comuns"
+        id="toc-as-objeções-mais-comuns">As objeções mais
+        comuns</a></li>
+        <li><a href="#preço-vs.-valor" id="toc-preço-vs.-valor">Preço
+        vs. valor</a></li>
+        </ul></li>
+        <li><a href="#analise-o-momento-em-que-a-compra-acontece"
+        id="toc-analise-o-momento-em-que-a-compra-acontece">Analise o
+        momento em que a compra acontece</a>
+        <ul>
+        <li><a href="#você-é-o-último-na-fila"
+        id="toc-você-é-o-último-na-fila">Você é o último na
+        fila</a></li>
+        <li><a href="#o-que-prestar-atenção-neste-momento"
+        id="toc-o-que-prestar-atenção-neste-momento">O que prestar
+        atenção neste momento</a></li>
+        <li><a href="#seu-cliente-é-o-motivo-do-crescimento"
+        id="toc-seu-cliente-é-o-motivo-do-crescimento">Seu cliente é o
+        motivo do crescimento</a></li>
+        </ul></li>
+        <li><a href="#entenda-os-níveis-de-conhecimento-do-seu-cliente"
+        id="toc-entenda-os-níveis-de-conhecimento-do-seu-cliente">Entenda
+        os níveis de conhecimento do seu cliente</a>
+        <ul>
+        <li><a href="#cada-consumidor-tem-um-nível-de-consciência"
+        id="toc-cada-consumidor-tem-um-nível-de-consciência">Cada
+        consumidor tem um nível de consciência</a></li>
+        <li><a href="#as-5-etapas-de-consciência"
+        id="toc-as-5-etapas-de-consciência">As 5 etapas de
+        consciência</a></li>
+        <li><a href="#o-que-fazer-com-isso-1"
+        id="toc-o-que-fazer-com-isso-1">O que fazer com isso</a></li>
+        </ul></li>
+        <li><a
+        href="#conectando-tudo-e-finalmente-definindo-seu-público-alvo"
+        id="toc-conectando-tudo-e-finalmente-definindo-seu-público-alvo">Conectando
+        tudo e finalmente definindo seu público-alvo</a>
+        <ul>
+        <li><a href="#os-7-pilares-que-você-percorreu"
+        id="toc-os-7-pilares-que-você-percorreu">Os 7 pilares que você
+        percorreu</a></li>
+        <li><a href="#o-que-vem-depois" id="toc-o-que-vem-depois">O que
+        vem depois</a></li>
+        </ul></li>
+        <li><a href="#conclusão-do-acho-à-certeza"
+        id="toc-conclusão-do-acho-à-certeza">Conclusão: Do “acho” à
+        certeza</a>
+        <ul>
+        <li><a href="#os-7-pilares-em-resumo"
+        id="toc-os-7-pilares-em-resumo">Os 7 pilares em resumo</a></li>
+        <li><a href="#o-que-muda-quando-você-sai-do-acho"
+        id="toc-o-que-muda-quando-você-sai-do-acho">O que muda quando
+        você sai do “acho”</a></li>
+        </ul></li>
+        <li><a href="#apêndice-templates-e-ferramentas"
+        id="toc-apêndice-templates-e-ferramentas">Apêndice: Templates e
+        Ferramentas</a>
+        <ul>
+        <li><a href="#registro-de-perguntas-prática-1"
+        id="toc-registro-de-perguntas-prática-1">Registro de Perguntas
+        (Prática 1)</a></li>
+        <li><a href="#perfil-de-quem-realmente-compra-prática-2"
+        id="toc-perfil-de-quem-realmente-compra-prática-2">Perfil de
+        Quem Realmente Compra (Prática 2)</a></li>
+        <li><a href="#registro-de-elogios-e-feedbacks-prática-3"
+        id="toc-registro-de-elogios-e-feedbacks-prática-3">Registro de
+        Elogios e Feedbacks (Prática 3)</a></li>
+        <li><a href="#mapa-de-objeções-prática-4"
+        id="toc-mapa-de-objeções-prática-4">Mapa de Objeções (Prática
+        4)</a></li>
+        <li><a href="#momento-da-compra-prática-5"
+        id="toc-momento-da-compra-prática-5">Momento da Compra (Prática
+        5)</a></li>
+        <li><a href="#mapa-de-níveis-de-consciência-prática-6"
+        id="toc-mapa-de-níveis-de-consciência-prática-6">Mapa de Níveis
+        de Consciência (Prática 6)</a></li>
+        <li><a href="#checklist-de-definição-de-público-alvo-prática-7"
+        id="toc-checklist-de-definição-de-público-alvo-prática-7">Checklist
+        de Definição de Público-Alvo (Prática 7)</a></li>
+        <li><a href="#ferramentas-úteis"
+        id="toc-ferramentas-úteis">Ferramentas úteis</a></li>
+        </ul></li>
+        </ul>
+      </nav>
+
+  <!-- Main -->
+  <main class="main-content" id="main-content">
+    <section id="sobre-este-e-book" class="level1">
+    <h1>Sobre este e-book</h1>
+    <p><em>Este documento foi escrito em digitação, sem uso de
+    I.A.</em></p>
+    <hr />
+    <p>Esse e-book foi criado pra te ensinar.</p>
+    <p>Para ser sua consulta até você realmente mapear o público-alvo do
+    seu negócio — e aí que a magia pode acontecer. Conhecendo seu
+    público, você vai saber criar o produto dos sonhos, a oferta da vida
+    dessas pessoas, pois você as conhece.</p>
+    <p>Seu negócio não cresce baseado em “acho que…”. É importante criar
+    raiz nas informações que já tem com seus consumidores. As pistas
+    estão na sua frente.</p>
+    <p>Dúvidas de quem compra, perguntas que seus clientes fazem,
+    reclamações e elogios que seu produto recebe — tudo isso tem mais
+    valor do que você tem pensado.</p>
+    <p>Então, o seu público-alvo é…</p>
+    <p><strong>Jean Victor Paradella</strong></p>
+    </section>
+    <section id="introdução-achar-não-é-ter-certeza" class="level1">
+    <h1>Introdução: Achar não é ter certeza</h1>
+    <blockquote>
+    <p><em>“Acho que meu público é…”</em></p>
+    </blockquote>
+    <p>Existe uma frase muito comum no mundo dos negócios — e muito
+    provavelmente você pense assim também. Achando que seu público são
+    jovens empreendedores que querem melhorar de vida.</p>
+    <p>Mas se você passar pelos próximos 7 pilares que vou mostrar a
+    seguir e não ter mais certeza disso, finalmente poderá ter a chance
+    de ter <strong>certeza de verdade</strong>.</p>
+    <hr />
+    <section id="seu-negócio-não-cresce-baseado-em-acho-que"
+    class="level2">
+    <h2>Seu negócio não cresce baseado em “acho que”</h2>
+    <p>É importante criar raiz nas informações que já tem com seus
+    consumidores. As “pistas” estão na sua frente:</p>
+    <ul>
+    <li>Dúvidas de quem compra, perguntas que seus clientes fazem,
+    reclamações e elogios que seu produto recebe — tudo isso tem mais
+    valor do que você tem pensado.</li>
+    </ul>
+    <p>Então atenção: esse e-book foi criado pra te ensinar, para ser
+    sua consulta até você realmente mapear o público-alvo do seu
+    negócio.</p>
+    <p>Aí é que a magia pode acontecer. Conhecendo seu público, você vai
+    saber criar o produto dos sonhos, a oferta da vida dessas pessoas —
+    pois você as conhece.</p>
+    <hr />
+    </section>
+    <section id="o-que-vem-pela-frente" class="level2">
+    <h2>O que vem pela frente</h2>
+    <p>São 7 práticas. Cada uma direta, aplicável e tirada da realidade
+    de negócios de todos os portes.</p>
+    <p>Não leia passivamente. Anote. Questione. O conhecimento que fica
+    é aquele que passou pela sua mão.</p>
+    <p>Vamos começar.</p>
+    </section>
+    </section>
+    <section id="observe-as-perguntas-que-mais-se-repetem"
+    class="level1">
+    <h1>Observe as perguntas que mais se repetem</h1>
+    <blockquote>
+    <p><em>“As pistas do seu público-alvo já estão na sua frente — você
+    só precisa parar de ignorá-las.”</em></p>
+    </blockquote>
+    <p>As perguntas que seus clientes fazem variam. Tem a pergunta dos
+    curiosos — que você muito provavelmente presta mais atenção do que
+    deveria — e tem a pergunta que valida o sonho de consumo do seu
+    público-alvo e o nível de relação deles com seu produto.</p>
+    <hr />
+    <section
+    id="curioso-vs.-interessado-eles-se-parecem-mas-são-bem-diferentes"
+    class="level2">
+    <h2>Curioso vs. interessado: eles se parecem, mas são bem
+    diferentes</h2>
+    <p>Seu produto pode ser uma consulta odontológica, um banho e tosa
+    do ramo pet, uma loja de semijóias ou até mesmo uma cafeteria no
+    centro da sua cidade. Independente do negócio, o consumidor repete o
+    padrão: curioso ou interessado. Esses dois se parecem muito — e isso
+    te confunde.</p>
+    <p>Imagina só: talvez você esteja vendendo bicicleta para um atleta
+    corredor. Faz sentido? Provavelmente sim. Mas o que esse corredor
+    deseja mais — um tênis da Nike ou a sua bike? kkk</p>
+    <p>A resposta é <em>Just Do It</em>. A Nike com certeza não se
+    importa completamente com a venda da bike como concorrente. Mas sabe
+    com clareza que esse rapaz corredor é o público-alvo que ela
+    construiu — e por isso tem uns 100 produtos que são o “sonho de
+    consumo” desse atleta, que muito provavelmente continua comprando
+    ainda mais.</p>
+    <p>Algo impede esse rapaz de comprar uma bicicleta? Não. Mas talvez
+    suas bikes casuais sejam mais interessantes para garotos que vão
+    para o trabalho pedalando, e suas bikes de carbono com componentes
+    Shimano sejam interessantes para entusiastas em ciclismo.</p>
+    <p>Vê a diferença?</p>
+    <hr />
+    </section>
+    <section id="o-que-as-perguntas-revelam" class="level2">
+    <h2>O que as perguntas revelam</h2>
+    <p>Se você em um mês escuta perguntas como estas:</p>
+    <ul>
+    <li><em>“Você tem isso? Você faz aquilo?”</em></li>
+    <li><em>“Como funciona seu serviço?”</em></li>
+    <li><em>“Quanto tempo leva?”</em></li>
+    <li><em>“Qual valor de entrega?”</em></li>
+    <li><em>“Qual a diferença entre essa opção e a outra?”</em></li>
+    <li><em>“Por que o seu é mais caro que outros?”</em></li>
+    </ul>
+    <p>Pode parecer que tem curiosos atrás do seu produto. Mas muito
+    provavelmente essa galera está em mais de uma loja verificando se
+    alguém consegue apresentar o produto dos sonhos deles.</p>
+    <p>Se você anotar essas perguntas durante um mês e dedicar pelo
+    menos uma semana reconstruindo seu arsenal de vendas, sua técnica de
+    comunicação e a percepção de valor do seu produto, você sai dessa
+    primeira etapa para a etapa de fechamento com seu cliente:</p>
+    <blockquote>
+    <p><em>“Será no cartão ou no pix?”</em> <em>“Entrega para hoje ou
+    amanhã?”</em></p>
+    </blockquote>
+    <p>O atleta poderia ter dúvida se o tênis da Nike é realmente tudo
+    isso que dizem — na vitrine é bonito, mas será que no pé dói? kkk
+    Assim é com o seu cliente: te vê na vitrine, se sente interessado,
+    mas você ainda não tirou as dúvidas dele.</p>
+    <hr />
+    </section>
+    <section id="como-tirar-dúvidas-além-da-comunicação-verbal"
+    class="level2">
+    <h2>Como tirar dúvidas além da comunicação verbal?</h2>
+    <p>Continue lendo. As próximas práticas vão fazer sentido logo
+    mais.</p>
+    <hr />
+    <p><strong>Resumo rápido:</strong> As perguntas que seus clientes
+    fazem são o mapa do que eles ainda não entenderam sobre seu produto.
+    Curioso e interessado se parecem, mas são perfis diferentes.
+    Documente as perguntas que chegam no mês — esse registro vai mudar a
+    forma como você vê o seu negócio.</p>
+    </section>
+    </section>
+    <section id="identifique-quem-realmente-compra-de-você"
+    class="level1">
+    <h1>Identifique quem realmente compra de você</h1>
+    <blockquote>
+    <p><em>“Só a pura curiosidade ou o interesse não vende.”</em></p>
+    </blockquote>
+    <p>Aqui eu te faço duvidar se realmente definir o seu público-alvo é
+    olhar apenas para quem demonstra interesse pelo seu produto.</p>
+    <hr />
+    <section id="quem-é-uma-pessoa-interessada-no-seu-produto"
+    class="level2">
+    <h2>Quem é uma pessoa interessada no seu produto?</h2>
+    <p>A partir da minha experiência no mercado digital, quem se
+    interessa na verdade vai ficar do outro lado da vitrine olhando seu
+    cardápio. Ela vai ver o croissant com preço de R$45 e não vai
+    entender a experiência que ele proporciona.</p>
+    <p>Desde o cardápio, a experiência precisa acontecer. É estimulando
+    as pessoas a imaginarem seu produto na vida delas que a magia
+    acontece.</p>
+    <p>Vê? Você imaginou o melhor croissant da sua vida agora que está
+    lendo isso. E se esse cardápio tivesse te mostrado essa experiência,
+    você provavelmente teria saído do cardápio para algo mais íntimo —
+    com garfo e faca nas mãos e muita crocância e maciez.</p>
+    <hr />
+    </section>
+    <section id="como-você-identifica-que-tem-pessoas-interessadas"
+    class="level2">
+    <h2>Como você identifica que tem pessoas interessadas?</h2>
+    <p>Quando você vê a mesma pergunta de pessoas que entram em contato
+    mas <strong>não compram</strong> de você. São pessoas diferentes, em
+    momentos diferentes, mas todas elas interessadas no seu produto. É
+    aí que você mapeia o interesse.</p>
+    <p>Quando você sabe qual produto as pessoas têm interesse, quais
+    dúvidas elas normalmente têm, e mesmo respondendo as dúvidas elas
+    <strong>não compram</strong> — ou está na hora de mudar a abordagem
+    na apresentação do produto, ou você está focando no público
+    errado.</p>
+    <p>O croissant de R$45 é para quem ama a experiência gastronômica —
+    não para quem quer a praticidade da lanchonete. É um momento
+    diferente, portanto deve comunicar diferente.</p>
+    <hr />
+    </section>
+    <section id="o-que-fazer-com-isso" class="level2">
+    <h2>O que fazer com isso</h2>
+    <p>Você provavelmente não quer deixar as pessoas presas na fase do
+    cardápio.</p>
+    <p>Para isso, identifique quem realmente compra de você e torne sua
+    comunicação afetiva com esse público. Conheça o momento deles. Seja
+    específico.</p>
+    <hr />
+    <p><strong>Resumo rápido:</strong> Interesse não é compra. Pessoas
+    que perguntam muito mas não compram revelam um gap na sua
+    comunicação ou no seu público. Identifique quem de fato fecha — e
+    construa sua comunicação para essa pessoa, não para o curioso da
+    vitrine.</p>
+    </section>
+    </section>
+    <section id="escute-os-elogios-com-atenção" class="level1">
+    <h1>Escute os elogios com atenção</h1>
+    <blockquote>
+    <p><em>“Seu produto não retém o cliente que não se transforma em fã
+    — e o cliente indiferente à sua marca não venderá seu produto como
+    indicação.”</em></p>
+    </blockquote>
+    <p>Você tem uma esteira de produtos, e agora o seu carro-chefe está
+    definido. Com isso você tem estrutura o suficiente para medir a
+    satisfação dos consumidores com menos barreira do que quem nunca
+    comprou de você. Concorda?</p>
+    <hr />
+    <section id="mas-a-vida-é-corrida" class="level2">
+    <h2>Mas a vida é corrida</h2>
+    <p>Lidar com o financeiro, o operacional, o administrativo… Será que
+    ainda vai ter que medir a qualidade do produto?</p>
+    <p>kkk… Sim! Você tem que ter um processo para continuar aprimorando
+    seu produto.</p>
+    <p>Seu negócio pode ampliar o quanto quiser. Mas se seu produto não
+    formar uma mancha no cliente — se não for o “mais mais” do mercado,
+    da região — você pode até adicionar dois milhões em tráfego pago no
+    mês. Mas receberá um cliente e perderá outro, por falta de
+    qualidade.</p>
+    <p>Seu produto não retém o cliente. E o cliente que não se
+    transforma em fã é indiferente à sua marca — portanto, não venderá
+    seu produto como indicação.</p>
+    <hr />
+    </section>
+    <section id="o-que-os-elogios-revelam" class="level2">
+    <h2>O que os elogios revelam</h2>
+    <p>Escutar ou incentivar o feedback e o elogio do seu cliente é um
+    meio de mapear como posicionar seu produto da forma correta e
+    acentuar ainda mais o time que torce por você e sua marca.</p>
+    <p>Preste atenção quando seu cliente diz:</p>
+    <ul>
+    <li><em>“Seu produto é mais barato.”</em></li>
+    <li><em>“Seu produto tem mais qualidade.”</em></li>
+    <li><em>“Seu produto me passou mais confiança.”</em></li>
+    <li><em>“Seu produto é o único que serve em mim.”</em></li>
+    <li><em>“Não achei nenhum outro lugar que me fizesse sentir
+    assim.”</em></li>
+    <li><em>“Mesmo quando erram, vocês buscam ao máximo
+    corrigir.”</em></li>
+    </ul>
+    <p>Cada uma dessas frases é um diferencial que você pode amplificar
+    — e o vocabulário que seu cliente usa é exatamente o que deve
+    aparecer na sua comunicação.</p>
+    <hr />
+    </section>
+    <section id="o-exemplo-do-roxinho" class="level2">
+    <h2>O exemplo do roxinho</h2>
+    <p>Vou dar um exemplo de empresa que você conhece que não precisa de
+    setor de vendas nem de tráfego pago para vender (sendo uma das
+    únicas exceções no mundo que não precisa de ambos).</p>
+    <p>Você conhece o cartão roxinho? O roxinho é famoso aqui no Brasil.
+    Primeiro banco sem anuidade no Brasil, surgiu em 2013 e agora é
+    febre no país inteiro — tanto que não precisei citar o nome da
+    empresa e você já identificou qual é.</p>
+    <p>Acredito que seja uma das empresas mais focadas na experiência do
+    cliente. Preza pela simplicidade, por não cair na qualidade e por
+    manter o cliente fiel desde o início da experiência. Por isso hoje
+    são mais de 120 milhões de pessoas com o roxinho em suas vidas — e
+    60% delas utilizam como principal banco no dia a dia.</p>
+    <p>Isso sem ter setor de vendas, meu caro e minha cara.</p>
+    <hr />
+    </section>
+    <section id="o-que-fazer" class="level2">
+    <h2>O que fazer</h2>
+    <p>Peça para os seus clientes um feedback quando possível — seja a
+    experiência boa ou ruim. Entenda bem seu produto e o que seu público
+    quer realmente comprar de você.</p>
+    <blockquote>
+    <p>A prática de NPS é muito utilizada para isso em grandes empresas
+    — isso fica para um outro tema.</p>
+    </blockquote>
+    <hr />
+    <p><strong>Resumo rápido:</strong> O elogio do cliente é o mapa do
+    seu diferencial real — não o que você acha que é bom, mas o que ele
+    confirma que é bom. Crie um processo para coletar feedbacks e use
+    esse vocabulário na sua comunicação. Um produto que gera fãs não
+    precisa depender de tráfego pago para crescer.</p>
+    </section>
+    </section>
+    <section id="preste-atenção-nas-objeções" class="level1">
+    <h1>Preste atenção nas objeções</h1>
+    <blockquote>
+    <p><em>“Preço é diferente de valor — todos sabem disso, mas esse
+    mantra merece mais tempo da sua reflexão.”</em></p>
+    </blockquote>
+    <p>Cidade metropolitana, centrão — calor de verão de Janeiro no
+    Brasil. Você provavelmente não verá um vendedor de água de coco em
+    cada esquina como seria se estivesse no litoral praiano, onde você
+    pode se deleitar de uma água de coco gelada e um passeio beira-mar
+    com seu cão e família.</p>
+    <p>Acha que o vendedor de coco teria a mesma facilidade de vender
+    pra você no centrão metropolitano?</p>
+    <hr />
+    <section id="seu-produto-está-no-lugar-certo" class="level2">
+    <h2>Seu produto está no lugar certo?</h2>
+    <p>Analise se você já pensou isso pro seu produto. O que você
+    oferece está no lugar que deveria estar? Está sendo comunicado da
+    maneira correta?</p>
+    <p>Sempre tem o que aprimorar. E se você não separou um momento
+    sequer durante a semana para pensar sobre isso, como imagina fazer
+    seu produto se tornar melhor do que é hoje ou do que foi ontem?</p>
+    <p>Pensar sobre seu produto te movimenta a tomar alguma atitude para
+    quebrar as possíveis objeções que surgem no fluxo de vendas do seu
+    negócio — algo completamente relacionado com a comunicação que tem
+    tido com seu público.</p>
+    <hr />
+    </section>
+    <section id="o-consultório-de-estética" class="level2">
+    <h2>O consultório de estética</h2>
+    <p>Imagine que tem um consultório de estética com valor de consulta
+    de R$800 e a concorrência direta a R$300. Tem alguém cobrando caro
+    nessa situação?</p>
+    <p>kkk… Não! Tem quem pague R$800 e quem pague R$300. Mas o
+    consumidor precisa ver o alinhamento de valores da marca em que vai
+    passar a acreditar. Quem realmente entender a proposta não vai
+    questionar o preço do serviço.</p>
+    <blockquote>
+    <p>O negócio pode falir se não souber comunicar e quebrar a objeção
+    de quem realmente é o público com a necessidade e o poder aquisitivo
+    de compra.</p>
+    </blockquote>
+    <p>Aquilo que você oferece, por mais que haja outros quatro fazendo
+    o mesmo no mesmo quarteirão, tem algo diferente. Nenhum dos quatro é
+    exatamente igual — cada um tem um resquício especial.</p>
+    <p>Isso deve ser importante para você, dono do negócio? Não
+    necessariamente. Mas é para o seu cliente. E se você escutar seu
+    cliente e aprimorar sua conexão com ele, verá claramente que é
+    importante.</p>
+    <hr />
+    </section>
+    <section id="as-objeções-mais-comuns" class="level2">
+    <h2>As objeções mais comuns</h2>
+    <p>Ouça com atenção quando o cliente disser:</p>
+    <ul>
+    <li><em>“Vou pensar um pouco.”</em></li>
+    <li><em>“Vou falar com a minha esposa primeiro.”</em></li>
+    <li><em>“Vou contatar de novo no dia 5.”</em></li>
+    <li><em>“Talvez eu veja isso mais pra frente.”</em></li>
+    <li><em>“Quero pesquisar outras opções.”</em></li>
+    </ul>
+    <p>Essas frases e outras podem refletir o padrão de comportamento de
+    uma parcela dos seus clientes. Alguns você não sabe o que estão
+    pensando. Mas outros você sabe exatamente — que seu produto não era
+    pra eles, pois o valor é mais alto do que podem pagar.</p>
+    <p>Ou será que isso é orgulho seu, e na verdade seu produto deveria
+    se comunicar de forma que ficasse estampado para o consumidor que o
+    valor realmente será alto?</p>
+    <hr />
+    </section>
+    <section id="preço-vs.-valor" class="level2">
+    <h2>Preço vs. valor</h2>
+    <p><em>“Preço é diferente de valor”</em> — todos sabem disso. Mas
+    esse mantra merece mais tempo da sua reflexão.</p>
+    <p>A partir da imagem que você transmite com o seu produto, você
+    atrai determinada clientela. Isso é básico, mas pouco trabalhado —
+    porque é trabalhoso pensar nisso.</p>
+    <hr />
+    <p><strong>Resumo rápido:</strong> Objeções não são rejeições — são
+    sinais. “Vou pensar” pode significar que seu produto não está
+    posicionado para o público certo, ou que a percepção de valor ainda
+    não ficou clara. Mapeie as objeções mais frequentes e use-as como
+    combustível para aprimorar sua comunicação.</p>
+    </section>
+    </section>
+    <section id="analise-o-momento-em-que-a-compra-acontece"
+    class="level1">
+    <h1>Analise o momento em que a compra acontece</h1>
+    <blockquote>
+    <p><em>“Você é o último na fila da jornada de compra — seu cliente
+    não comprou de diversas outras fontes e foi com você.”</em></p>
+    </blockquote>
+    <p>Entenda: se você também está no Brasil, saiba que estamos em um
+    dos países mais consumidores do mundo todo. Comprar nunca foi tão
+    fácil, e ter estímulos diferentes diariamente faz as pessoas
+    quererem algo novo a cada semana que passa.</p>
+    <hr />
+    <section id="você-é-o-último-na-fila" class="level2">
+    <h2>Você é o último na fila</h2>
+    <p>Toda venda que você faz, a única coisa que realmente sabe é:
+    <strong>você é o último na fila da jornada de compra</strong>. Seu
+    cliente não comprou de diversas outras fontes — foi com você. Quando
+    chegou na sua vez, ele decidiu comprar.</p>
+    <p>Parece até filme de romance. Mas você sabe que parte dessa compra
+    é mérito do desejo do cliente, outra parte é da necessidade dele, e
+    o restante é do seu setor de vendas — ou, se a imagem do seu produto
+    estiver com a visão de público-alvo ajustada, você teve uma oferta
+    irresistível para fazer.</p>
+    <hr />
+    </section>
+    <section id="o-que-prestar-atenção-neste-momento" class="level2">
+    <h2>O que prestar atenção neste momento</h2>
+    <p>Neste momento tem algo ao qual prestar devida atenção:
+    <strong>qual é o momento, e o que estava acontecendo na vida daquela
+    pessoa quando ela decidiu agir na compra?</strong></p>
+    <ul>
+    <li>Se você vende apartamento, você leva em consideração a renda da
+    pessoa.</li>
+    <li>Se você vende arranjos de flores festivos, você precisa saber
+    que tipo de festa seu cliente está planejando.</li>
+    <li>Se você vende vídeo para casamento, você compreende as nuances
+    da relação do casal para registrar a história do jeitinho que eles
+    contariam.</li>
+    </ul>
+    <hr />
+    </section>
+    <section id="seu-cliente-é-o-motivo-do-crescimento" class="level2">
+    <h2>Seu cliente é o motivo do crescimento</h2>
+    <p>Acredito que até aqui você já deva ter observado com clareza que
+    o seu cliente é o motivo do crescimento do seu negócio. Certo?</p>
+    <p>Quando você entende o momento de vida do seu cliente na hora da
+    compra, você deixa de ser mais um na lista de opções e passa a ser a
+    escolha natural — aquela que parece feita especialmente para
+    ele.</p>
+    <hr />
+    <p><strong>Resumo rápido:</strong> Cada compra tem um gatilho — um
+    momento específico na vida do cliente que o levou a agir.
+    Identifique esse momento para o seu produto: o que estava
+    acontecendo na vida da pessoa quando ela decidiu comprar? Colete
+    essas informações sempre que possível. Elas revelam muito mais sobre
+    o seu público do que qualquer dado demográfico.</p>
+    </section>
+    </section>
+    <section id="entenda-os-níveis-de-conhecimento-do-seu-cliente"
+    class="level1">
+    <h1>Entenda os níveis de conhecimento do seu cliente</h1>
+    <blockquote>
+    <p><em>“Quando falamos sobre público-alvo, é comum imaginar que
+    todas as pessoas que poderiam se beneficiar do seu produto estão
+    prontas para comprar de você — mas não é exatamente assim.”</em></p>
+    </blockquote>
+    <p>O público da sua marca deixa rastros. Agora que você está atento,
+    vamos voltar aos padrões de comportamento de cada etapa de
+    conhecimento que os consumidores têm em sua jornada de compra.</p>
+    <hr />
+    <section id="cada-consumidor-tem-um-nível-de-consciência"
+    class="level2">
+    <h2>Cada consumidor tem um nível de consciência</h2>
+    <p>Você sabia disso? É verdade. Tem mesmo. Isso tem sido mapeado há
+    décadas pelas grandes empresas, e manter esse conhecimento em vista
+    deve estar no seu checklist de coisas a considerar quando for criar
+    seu funil de vendas.</p>
+    <p>Isso vale para todo negócio? Sim e não — depende se sua empresa
+    tem margem para crescer muito. Esses mínimos detalhes são muito
+    importantes para empresas gigantescas. Deve haver um motivo para
+    isso, não acha?</p>
+    <p>O motivo é: você leva isso consigo como fundamento se sua
+    intenção é crescer com sua empresa — o que, por incrível que pareça,
+    não é a realidade de muita gente que é empresária.</p>
+    <hr />
+    </section>
+    <section id="as-5-etapas-de-consciência" class="level2">
+    <h2>As 5 etapas de consciência</h2>
+    <p>Baseado no trabalho de Eugene Schwartz (<em>Breakthrough
+    Advertising</em>), o mercado pode ser dividido assim:</p>
+    <section id="público-inconsciente-do-problema-30" class="level3">
+    <h3>Público inconsciente do problema — ~30%</h3>
+    <p>É indiferente à solução que você oferece, pois ainda nem sabe que
+    tem esse problema para resolver kkk… Talvez você possa dar algo de
+    graça para essa pessoa ir se conscientizando. O lema é plantar para
+    colher, não?</p>
+    </section>
+    <section id="público-consciente-do-problema-30" class="level3">
+    <h3>Público consciente do problema — ~30%</h3>
+    <p>Aqui já dá para trabalhar melhor — mas ainda não é hora de vender
+    para esse pessoal. Aqui você vai poder dar detalhes importantes do
+    seu diferencial, para gerar aquele espaço na mente da pessoa. Passe
+    informações que seu cliente <strong>está pronto para
+    receber</strong>. Nada muito agressivo, ok? Vá com calma.</p>
+    </section>
+    <section id="público-consciente-da-solução-30" class="level3">
+    <h3>Público consciente da solução — ~30%</h3>
+    <p>Chegamos ao momento decisivo. Se você sabe que quem está aqui tem
+    determinado problema, e sabe disso, e além de saber está buscando
+    alguém que o ajude — essa pessoa não vai resistir à sua oferta.</p>
+    <p>Mas lembra que você mapeou que seu público tem determinadas
+    dúvidas e objeções? Mesmo interessado em comprar de você, não é hora
+    de colocar a oferta estampada na frente. É hora de fazer ele
+    entender sua experiência. É hora de se conectar com seus princípios
+    de marca.</p>
+    <p>Se seu público é mãe — mas são mães de crianças de 2 anos — a mãe
+    em gestação não entenderia sua comunicação. Compreende?</p>
+    <blockquote>
+    <p>Como faço isso? Às vezes é no seu atendimento ao cliente. Às
+    vezes é na confiança que sua marca está passando com toda a vitrine
+    — Instagram, depoimentos, sua empresa no Google. E ainda assim às
+    vezes que você abriu sua agenda para o cliente tirar todas as
+    dúvidas que tinha. Se eu tenho uma cafeteria, preciso que meu
+    cardápio e minha vitrine permaneçam irresistíveis juntos — um não
+    pode ser menos que o outro. Os detalhes importam muito.</p>
+    </blockquote>
+    </section>
+    <section id="público-consciente-da-oferta-7" class="level3">
+    <h3>Público consciente da oferta — ~7%</h3>
+    <p>Aqui chegamos na cereja do bolo. Sua oferta se tornou
+    irresistível pois você mapeou seu cliente, aprimorou seu produto
+    especialmente para ele e agora está no momento e no lugar certo.</p>
+    <p>Ou seu produto é uma exceção no mercado — como é o Nubank — ou
+    você tem um bom setor de vendas para melhorar a experiência no
+    onboarding da sua empresa: seja uma secretária em consultório médico
+    ou um bom atendimento na academia de crossfit.</p>
+    </section>
+    <section id="público-pronto-para-comprar-3" class="level3">
+    <h3>Público pronto para comprar — ~3%</h3>
+    <p>Detalhes finais, negociação. Aqui é mais fácil, menos atrito.
+    Mais do que você já sabe — que é vender. Sei que não é simples
+    assim, mas não preciso lecionar essa etapa para você.</p>
+    <hr />
+    </section>
+    </section>
+    <section id="o-que-fazer-com-isso-1" class="level2">
+    <h2>O que fazer com isso</h2>
+    <p>Se tem muito público que um dia ainda pode vir a comprar de você,
+    será que não é hora de arregaçar as mangas e mapear melhor seu
+    público para encontrar formas de aumentar a velocidade nessa etapa
+    de consciência do consumidor?</p>
+    <p>Fica a dúvida kkk…</p>
+    <blockquote>
+    <p>As porcentagens incluídas em cada etapa variam muito — essa é uma
+    base aproximada de um mercado totalitário mapeado por Eugene
+    Schwartz, autor de <em>Breakthrough Advertising</em>.</p>
+    </blockquote>
+    <hr />
+    <p><strong>Resumo rápido:</strong> Nem todo mundo que poderia se
+    beneficiar do seu produto está pronto para comprar. Há 5 níveis de
+    consciência — e cada um exige uma abordagem diferente. A maioria do
+    mercado (~90%) está fora do momento de compra imediato. Entender em
+    qual nível cada público está é o que separa uma comunicação que
+    converte de uma que apenas informa.</p>
+    </section>
+    </section>
+    <section
+    id="conectando-tudo-e-finalmente-definindo-seu-público-alvo"
+    class="level1">
+    <h1>Conectando tudo e finalmente definindo seu público-alvo</h1>
+    <blockquote>
+    <p><em>“Até que enfim, chegamos!!!!!”</em></p>
+    </blockquote>
+    <p>A definição do seu público-alvo você não “acha que é”. Seu
+    público tem etapas diferentes e vidas diferentes. Existem padrões
+    bem definidos para cada perfil de público que você costuma ter
+    atualmente — e para defini-los é necessário que você passe por tudo
+    o que vimos até aqui.</p>
+    <hr />
+    <section id="os-7-pilares-que-você-percorreu" class="level2">
+    <h2>Os 7 pilares que você percorreu</h2>
+    <p>Observe cada um com atenção aplicada ao seu negócio:</p>
+    <p><strong>1. Observe com detalhes as perguntas que seu público
+    faz.</strong></p>
+    <p><strong>2. Identifique quem é a pessoa que compra de você hoje —
+    sem achismo.</strong></p>
+    <p><strong>3. Se você tivesse mais dois ouvidos na cabeça,
+    utilizaria eles só para escutar os elogios dos seus
+    clientes.</strong> E aqui o elogio é o feedback construtivo — não se
+    engane.</p>
+    <p><strong>4. Saiba que seu produto não é tudo.</strong> É
+    necessário ter definido antes que o seu público terá certas objeções
+    — e você quer estar preparado para quebrá-las da melhor forma.</p>
+    <p><strong>5. O momento de vida do seu cliente na hora da compra é
+    importante.</strong> Colete informações quando possível e leve isso
+    com devida atenção e cuidado na entrega do produto.</p>
+    <p><strong>6. Existem muito mais pessoas fora do momento de compra
+    do que dentro.</strong> Não perca isso de vista.</p>
+    <hr />
+    </section>
+    <section id="o-que-vem-depois" class="level2">
+    <h2>O que vem depois</h2>
+    <p>Observe cada um desses pontos com valência dentro do seu negócio.
+    Com isso, você conseguirá mapear muito melhor seu público-alvo do
+    que “acha” saber hoje.</p>
+    <p>O seu negócio não cresce baseado em “acho que”. Agora você tem as
+    ferramentas para criar raiz nas informações que já tem com seus
+    consumidores.</p>
+    <p>As pistas estavam na sua frente o tempo todo.</p>
+    <hr />
+    <p><strong>Resumo rápido:</strong> Definir público-alvo não é um
+    achismo — é um processo. Perguntas que se repetem, quem realmente
+    compra, o que os clientes elogiam, as objeções que surgem, o momento
+    da compra e o nível de consciência do consumidor: todos esses dados
+    juntos constroem a imagem real do seu público. Agora você sabe como
+    olhar.</p>
+    </section>
+    </section>
+    <section id="conclusão-do-acho-à-certeza" class="level1">
+    <h1>Conclusão: Do “acho” à certeza</h1>
+    <blockquote>
+    <p><em>“Então, o seu público-alvo é…”</em></p>
+    </blockquote>
+    <p>Você chegou ao fim deste e-book. Mas na prática, chegou ao começo
+    de algo muito mais importante: o processo de realmente conhecer quem
+    é o cliente que você quer servir.</p>
+    <p>Seu negócio não cresce baseado em “acho que”. É preciso criar
+    raiz nas informações que já tem com seus consumidores — as pistas
+    estavam na sua frente o tempo todo.</p>
+    <p>Dúvidas de quem compra, perguntas que seus clientes fazem,
+    reclamações e elogios que seu produto recebe — tudo isso tem mais
+    valor do que você tinha pensado.</p>
+    <hr />
+    <section id="os-7-pilares-em-resumo" class="level2">
+    <h2>Os 7 pilares em resumo</h2>
+    <p><strong>Prática 1 — Observe as perguntas que mais se
+    repetem</strong> As perguntas que chegam todo dia são o mapa do que
+    seu público ainda não encontrou em você.</p>
+    <p><strong>Prática 2 — Identifique quem realmente compra de
+    você</strong> Interesse não é compra. Identifique quem de fato fecha
+    — e construa sua comunicação para essa pessoa.</p>
+    <p><strong>Prática 3 — Escute os elogios com atenção</strong> O
+    elogio do cliente é o mapa do seu diferencial real. Use esse
+    vocabulário na sua comunicação.</p>
+    <p><strong>Prática 4 — Preste atenção nas objeções</strong> “Vou
+    pensar” é um sinal — de posicionamento errado ou percepção de valor
+    ainda não clara.</p>
+    <p><strong>Prática 5 — Analise o momento em que a compra
+    acontece</strong> Cada compra tem um gatilho. Identifique o momento
+    de vida que leva o cliente a agir.</p>
+    <p><strong>Prática 6 — Entenda os níveis de conhecimento do seu
+    cliente</strong> ~90% do mercado está fora do momento de compra
+    imediato. Entenda em qual nível cada público está.</p>
+    <p><strong>Prática 7 — Conecte tudo e defina seu
+    público-alvo</strong> Não é achismo. É processo. Você agora tem as
+    ferramentas para mapear com clareza.</p>
+    <hr />
+    </section>
+    <section id="o-que-muda-quando-você-sai-do-acho" class="level2">
+    <h2>O que muda quando você sai do “acho”</h2>
+    <ul>
+    <li>Sua comunicação para de tentar agradar a todos e começa a
+    <strong>ressoar com as pessoas certas</strong></li>
+    <li>Seu produto evolui guiado por <strong>necessidades
+    reais</strong>, não supostas</li>
+    <li>Você atrai os clientes certos — aqueles que ficam, recomendam e
+    pagam pelo valor que entrega</li>
+    <li>Você toma decisões com mais confiança, porque elas têm base
+    real</li>
+    </ul>
+    <hr />
+    <p>Agora saia do <em>“acho”</em>. Entre na certeza.</p>
+    <p><em>Se este e-book cumpriu o papel de provocar reflexão e ação em
+    você, compartilhe com um empreendedor que também precisa sair do
+    “acho”.</em></p>
+    <p><strong>Jean Victor Paradella</strong></p>
+    </section>
+    </section>
+    <section id="apêndice-templates-e-ferramentas" class="level1">
+    <h1>Apêndice: Templates e Ferramentas</h1>
+    <p>Este apêndice reúne templates práticos para aplicar os 7 pilares
+    do e-book. Copie, adapte e use.</p>
+    <hr />
+    <section id="registro-de-perguntas-prática-1" class="level2">
+    <h2>Registro de Perguntas (Prática 1)</h2>
+    <p>Use este template durante 30 dias para documentar as perguntas
+    que chegam.</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Data</th>
+    <th>Pergunta recebida</th>
+    <th>Canal</th>
+    <th>Tipo (curioso / interessado)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Ao final do mês, identifique as 3 perguntas que mais se repetiram
+    — elas são o ponto de partida para ajustar sua comunicação.</p>
+    <hr />
+    </section>
+    <section id="perfil-de-quem-realmente-compra-prática-2"
+    class="level2">
+    <h2>Perfil de Quem Realmente Compra (Prática 2)</h2>
+    <p>Escolha 3 clientes que já compraram de você e responda:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Campo</th>
+    <th>Cliente A</th>
+    <th>Cliente B</th>
+    <th>Cliente C</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Idade aproximada</strong></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td><strong>Como chegou até você</strong></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td><strong>O que comprou</strong></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td><strong>Por que comprou</strong> (se souber)</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td><strong>Voltou a comprar?</strong></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>O que esses 3 têm em comum? Esse padrão é o início do seu público
+    real.</p>
+    <hr />
+    </section>
+    <section id="registro-de-elogios-e-feedbacks-prática-3"
+    class="level2">
+    <h2>Registro de Elogios e Feedbacks (Prática 3)</h2>
+    <table>
+    <thead>
+    <tr>
+    <th>Data</th>
+    <th>Elogio / feedback</th>
+    <th>Canal</th>
+    <th>Palavra-chave</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>As palavras-chave que se repetem nos elogios são o vocabulário do
+    seu diferencial. Use-as na sua comunicação.</p>
+    <hr />
+    </section>
+    <section id="mapa-de-objeções-prática-4" class="level2">
+    <h2>Mapa de Objeções (Prática 4)</h2>
+    <table>
+    <thead>
+    <tr>
+    <th>Objeção</th>
+    <th>Frequência (1-5)</th>
+    <th>O que pode significar</th>
+    <th>Como quebrar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><em>“Vou pensar um pouco”</em></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td><em>“Vou pesquisar outras opções”</em></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td><em>“Está um pouco caro”</em></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    </section>
+    <section id="momento-da-compra-prática-5" class="level2">
+    <h2>Momento da Compra (Prática 5)</h2>
+    <p>Para os próximos 10 clientes que fecharem com você, anote:</p>
+    <table>
+    <colgroup>
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Cliente</th>
+    <th>O que estava acontecendo na vida dele quando decidiu
+    comprar?</th>
+    <th>Gatilho identificado</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    </section>
+    <section id="mapa-de-níveis-de-consciência-prática-6"
+    class="level2">
+    <h2>Mapa de Níveis de Consciência (Prática 6)</h2>
+    <p>Para cada nível, defina como sua marca se comunica hoje:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Nível</th>
+    <th>% estimada</th>
+    <th>Como sua marca fala com esse público hoje?</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Inconsciente do problema</td>
+    <td>~30%</td>
+    <td></td>
+    </tr>
+    <tr>
+    <td>Consciente do problema</td>
+    <td>~30%</td>
+    <td></td>
+    </tr>
+    <tr>
+    <td>Consciente da solução</td>
+    <td>~30%</td>
+    <td></td>
+    </tr>
+    <tr>
+    <td>Consciente da oferta</td>
+    <td>~7%</td>
+    <td></td>
+    </tr>
+    <tr>
+    <td>Pronto para comprar</td>
+    <td>~3%</td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <hr />
+    </section>
+    <section id="checklist-de-definição-de-público-alvo-prática-7"
+    class="level2">
+    <h2>Checklist de Definição de Público-Alvo (Prática 7)</h2>
+    <ul class="task-list">
+    <li><label><input type="checkbox" />Documentei as perguntas mais
+    frequentes do último mês</label></li>
+    <li><label><input type="checkbox" />Identifiquei quem realmente
+    compra — com dados, não achismo</label></li>
+    <li><label><input type="checkbox" />Coletei e registrei elogios e
+    feedbacks dos clientes</label></li>
+    <li><label><input type="checkbox" />Mapeei as objeções mais comuns e
+    como quebrá-las</label></li>
+    <li><label><input type="checkbox" />Sei o momento de vida que leva
+    meu cliente a comprar</label></li>
+    <li><label><input type="checkbox" />Entendo em qual nível de
+    consciência está a maioria do meu público atual</label></li>
+    <li><label><input type="checkbox" />Consigo descrever meu
+    público-alvo sem usar a palavra “acho”</label></li>
+    </ul>
+    <hr />
+    </section>
+    <section id="ferramentas-úteis" class="level2">
+    <h2>Ferramentas úteis</h2>
+    <p><strong>Para coletar perguntas e feedbacks</strong></p>
+    <ul>
+    <li>WhatsApp Business, Instagram DMs, e-mail — registre manualmente
+    numa nota ou planilha</li>
+    <li>Google Forms — para pesquisas formais com clientes</li>
+    </ul>
+    <p><strong>Para analisar o público</strong></p>
+    <ul>
+    <li>Meta Business Suite — insights de audiência no
+    Instagram/Facebook</li>
+    <li>Google Analytics — quem visita seu site e como se comporta</li>
+    <li>Reclame Aqui — veja o que clientes falam dos concorrentes</li>
+    </ul>
+    <p><strong>Para organizar o que descobriu</strong></p>
+    <ul>
+    <li>Notion ou Google Planilhas — simples e suficiente</li>
+    <li>Miro — mapa visual da jornada do cliente</li>
+    </ul>
+    </section>
+    </section>
+  </main>
+
+</div>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="site-footer-brand">Achar Não é <em>Ter Certeza</em></div>
+  <div class="site-footer-note">Jean Victor Paradella · 2026</div>
+</footer>
+
+<!-- ── TOC TOGGLE (mobile) ──────────────────────────────────────────────────── -->
+<button class="toc-toggle" id="toc-toggle" aria-label="Abrir sumário">
+  <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="15" y2="18"/></svg>
+</button>
+<div class="toc-overlay" id="toc-overlay"></div>
+
+<script>
+(function () {
+  var toggle  = document.getElementById('toc-toggle');
+  var sidebar = document.getElementById('toc-sidebar');
+  var overlay = document.getElementById('toc-overlay');
+
+  function openToc()  { sidebar.classList.add('open');    overlay.classList.add('visible'); }
+  function closeToc() { sidebar.classList.remove('open'); overlay.classList.remove('visible'); }
+
+  toggle.addEventListener('click', function () {
+    sidebar.classList.contains('open') ? closeToc() : openToc();
+  });
+  overlay.addEventListener('click', closeToc);
+
+  // Reading progress
+  var bar = document.getElementById('progress');
+  window.addEventListener('scroll', function () {
+    var h = document.documentElement;
+    var pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+
+  // Active TOC link
+  var headings = document.querySelectorAll('section.level1 > h1, section.level2 > h2');
+  var tocLinks = document.querySelectorAll('#TOC a');
+
+  if (tocLinks.length && headings.length) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.closest('section') && entry.target.closest('section').id;
+          tocLinks.forEach(function (a) {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-15% 0px -72% 0px' });
+
+    headings.forEach(function (h) { obs.observe(h); });
+  }
+
+  // Close TOC on link click (mobile)
+  tocLinks.forEach(function (a) { a.addEventListener('click', closeToc); });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+---
+title: "Achar Não é Ter Certeza"
+subtitle: "Defina seu público-alvo"
+author: "Jean Victor Paradella"
+date: "2026"
+lang: pt-BR
+language: pt-BR
+
+# ─── Eisvogel layout ───────────────────────────────────
+titlepage: true
+titlepage-color: "0F0F0F"
+titlepage-text-color: "FFFFFF"
+titlepage-rule-color: "C49A1E"
+titlepage-rule-height: 3
+
+# ─── Typography ────────────────────────────────────────
+mainfont: "Playfair Display"
+sansfont: "Inter"
+monofont: "DejaVu Sans Mono"
+fontsize: 11pt
+linestretch: 1.75
+
+# ─── Page layout ───────────────────────────────────────
+geometry: "top=2.5cm, bottom=2.5cm, left=2.8cm, right=2.8cm"
+papersize: a4
+
+# ─── Colors ────────────────────────────────────────────
+table-use-row-colors: true
+colorlinks: true
+linkcolor: "ambar"
+urlcolor: "ambar"
+
+header-includes:
+  - \usepackage{xcolor}
+  - \definecolor{ambar}{HTML}{C49A1E}
+
+# ─── TOC ───────────────────────────────────────────────
+toc: true
+toc-own-page: true
+toc-title: "Sumário"
+
+# ─── Header / Footer ───────────────────────────────────
+header-left: "Achar Não é Ter Certeza"
+header-right: "Jean Victor Paradella"
+footer-left: ""
+footer-right: "\\thepage"
+
+# ─── Code blocks ───────────────────────────────────────
+listings: true
+listings-no-page-break: false
+highlight-style: tango
+
+# ─── PDF metadata ──────────────────────────────────────
+subject: "Empreendedorismo e Marketing"
+keywords:
+  - público-alvo
+  - empreendedorismo
+  - marketing
+  - personas
+  - negócios
+
+# ─── Compatibility ─────────────────────────────────────
+footnotes-disable-backlinks: true
+...

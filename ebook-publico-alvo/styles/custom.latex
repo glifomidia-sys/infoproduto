@@ -1,0 +1,112 @@
+% ─────────────────────────────────────────────────────────────────────────────
+%  custom.latex — PDF visual do e-book "Achar Não é Ter Certeza"
+%  Brandbook: Noir #0F0F0F · Âmbar #C49A1E · Creme #F5EDD3 · Off-white #FAFAF8
+% ─────────────────────────────────────────────────────────────────────────────
+
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{etoolbox}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{enumitem}
+
+% ── Paleta ────────────────────────────────────────────────────────────────────
+\definecolor{ambar}{HTML}{C49A1E}
+\definecolor{ambar-escuro}{HTML}{8B6914}
+\definecolor{ambar-xescuro}{HTML}{5C4210}
+\definecolor{creme}{HTML}{F5EDD3}
+\definecolor{offwhite}{HTML}{FAFAF8}
+\definecolor{noir}{HTML}{0F0F0F}
+\definecolor{carvao}{HTML}{1A1A1A}
+\definecolor{cinzatexto}{HTML}{444444}
+\definecolor{cinzamedio}{HTML}{888888}
+\definecolor{cinzaclaro}{HTML}{E8E6E0}
+
+% Sobrescreve cores do Eisvogel para blockquote
+\definecolor{blockquote-border}{HTML}{C49A1E}
+\definecolor{blockquote-text}{HTML}{5C4210}
+
+% ── Contadores para capítulos ────────────────────────────────────────────────
+\newcounter{chapternum}
+
+% ── H1 — Cabeçalho de capítulo com counter + régua âmbar ─────────────────────
+\titleformat{\section}{%
+  \fontsize{22}{26}\selectfont\bfseries\color{carvao}%
+}{%
+  % Label acima: número de capítulo em âmbar mini
+  \stepcounter{chapternum}%
+  \noindent\textcolor{ambar}{\rule{24pt}{1.5pt}}\hspace{6pt}%
+  {\fontsize{9}{11}\selectfont\bfseries\color{ambar}\MakeUppercase{Prática \thechapternum}}%
+  \\[6pt]%
+}{0pt}{}[%
+  \vspace{4pt}\textcolor{ambar}{\rule{\linewidth}{0.5pt}}\vspace{2pt}%
+]
+
+% Prefácio, Introdução e Conclusão não usam "Prática X"
+% Override para esses capítulos específicos via \titleformat*
+% (mantemos o counter mas não exibimos o label)
+\titlespacing*{\section}{0pt}{36pt}{14pt}
+
+% ── H2 — Subtítulo com marcador âmbar ────────────────────────────────────────
+\titleformat{\subsection}{%
+  \fontsize{13}{17}\selectfont\bfseries\color{carvao}%
+}{}{0pt}{%
+  \textcolor{ambar}{\rule{18pt}{1.5pt}}\hspace{6pt}%
+}
+\titlespacing*{\subsection}{0pt}{22pt}{6pt}
+
+% ── H3 — Label uppercase âmbar ───────────────────────────────────────────────
+\titleformat{\subsubsection}{%
+  \fontsize{10}{13}\selectfont\bfseries\color{ambar-escuro}%
+}{}{0pt}{}
+\titlespacing*{\subsubsection}{0pt}{14pt}{4pt}
+
+% ── Blockquote: fundo creme + borda âmbar (Playfair itálico) ─────────────────
+\renewenvironment{quote}{%
+  \begin{mdframed}[%
+    backgroundcolor=creme,%
+    linecolor=ambar,%
+    linewidth=3pt,%
+    leftline=true,%
+    rightline=false,%
+    topline=false,%
+    bottomline=false,%
+    innerleftmargin=14pt,%
+    innerrightmargin=10pt,%
+    innertopmargin=10pt,%
+    innerbottommargin=10pt,%
+    skipabove=12pt,%
+    skipbelow=12pt%
+  ]%
+  \itshape\color{ambar-xescuro}%
+}{%
+  \end{mdframed}%
+}
+
+% ── Tabelas: cabeçalho com fundo creme ───────────────────────────────────────
+\rowcolors{2}{white}{offwhite}
+
+% ── Fontes ────────────────────────────────────────────────────────────────────
+\setmonofont[Scale=0.86]{DejaVu Sans Mono}
+
+% ── Corpo do texto ────────────────────────────────────────────────────────────
+\setlength{\parskip}{7pt}
+\setlength{\parindent}{0pt}
+
+% ── Listas com bullet âmbar ───────────────────────────────────────────────────
+\setlist[itemize]{
+  leftmargin=20pt,
+  itemsep=3pt,
+  parsep=0pt,
+  label={\small\textcolor{ambar}{\textbullet}}
+}
+\setlist[enumerate]{
+  leftmargin=22pt,
+  itemsep=3pt,
+  parsep=0pt
+}

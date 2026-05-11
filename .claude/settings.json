@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wsl *)",
+      "Bash(rsync *)",
+      "Bash(git *)",
+      "Bash(npm *)",
+      "Bash(npx *)",
+      "Bash(mkdir *)",
+      "Bash(chmod *)",
+      "Bash(bash *)",
+      "Bash(ls *)",
+      "Bash(cp *)",
+      "Bash(rm *)"
+    ]
+  }
+}
