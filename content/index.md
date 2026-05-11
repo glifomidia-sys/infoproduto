@@ -81,8 +81,9 @@ Talvez precise apenas começar a enxergar, com mais atenção, aquilo que seu cl
 </script>
 
 <div style="text-align: center; margin: 2.5rem 0;">
-  <p style="margin-bottom: 1rem; font-size: 0.95rem; color: #d4d4d4;">O ebook tá com um cupom pros 50 próximos compradores.. era 47 reais na oferta normal.</p>
-  <a onclick="return false;" href="https://pay.hotmart.com/V105408718W?checkoutMode=2&off=50PRIMEIROS" class="hotmart-fb hotmart__button-checkout" style="display: inline-block; background: #C49A1E; color: #0F0F0F; font-weight: 700; font-size: 1.05rem; padding: 0.85rem 2rem; border-radius: 4px; letter-spacing: 0.02em; text-decoration: none; cursor: pointer;">
+  <p style="margin-bottom: 0.5rem; font-size: 0.95rem; color: #d4d4d4;">O ebook tá com um cupom pros 50 próximos compradores.. era 47 reais na oferta normal.</p>
+  <p style="margin-bottom: 1.25rem; font-size: 0.9rem; color: #b8b8b8;">Use o cupom <strong style="background: #1e1e1e; color: #C49A1E; padding: 0.2rem 0.6rem; border-radius: 3px; letter-spacing: 0.05em; font-family: monospace;">50PRIMEIROS</strong> no checkout.</p>
+  <a onclick="return false;" href="https://pay.hotmart.com/V105408718W?checkoutMode=2&off=x9tge63f" class="hotmart-fb hotmart__button-checkout" style="display: inline-block; background: #C49A1E; color: #0F0F0F; font-weight: 700; font-size: 1.05rem; padding: 0.85rem 2rem; border-radius: 4px; letter-spacing: 0.02em; text-decoration: none; cursor: pointer;">
     Acessar oferta
   </a>
 </div>
