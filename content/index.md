@@ -81,7 +81,8 @@ Talvez precise apenas começar a enxergar, com mais atenção, aquilo que seu cl
 </script>
 
 <div style="text-align: center; margin: 2.5rem 0;">
+  <p style="margin-bottom: 1rem; font-size: 0.95rem; color: #d4d4d4;">O ebook tá com um cupom pros 50 próximos compradores.. era 47 reais na oferta normal.</p>
   <a onclick="return false;" href="https://pay.hotmart.com/V105408718W?checkoutMode=2" class="hotmart-fb hotmart__button-checkout" style="display: inline-block; background: #C49A1E; color: #0F0F0F; font-weight: 700; font-size: 1.05rem; padding: 0.85rem 2rem; border-radius: 4px; letter-spacing: 0.02em; text-decoration: none; cursor: pointer;">
-    QUERO ENTENDER QUEM REALMENTE COMPRA DE MIM
+    Acessar oferta
   </a>
 </div>
