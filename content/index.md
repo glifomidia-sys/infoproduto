@@ -67,9 +67,21 @@ Você não precisa de mais um conteúdo genérico sobre marketing.
 
 Talvez precise apenas começar a enxergar, com mais atenção, aquilo que seu cliente já vem tentando mostrar faz tempo.
 
+<script type="text/javascript">
+  (function() {
+    var s = document.createElement('script');
+    s.src = 'https://static.hotmart.com/checkout/widget.min.js';
+    document.head.appendChild(s);
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.type = 'text/css';
+    l.href = 'https://static.hotmart.com/css/hotmart-fb.min.css';
+    document.head.appendChild(l);
+  })();
+</script>
+
 <div style="text-align: center; margin: 2.5rem 0;">
-  <!-- Link de compra será adicionado aqui -->
-  <span style="display: inline-block; background: #C49A1E; color: #0F0F0F; font-weight: 700; font-size: 1.05rem; padding: 0.85rem 2rem; border-radius: 4px; letter-spacing: 0.02em;">
+  <a onclick="return false;" href="https://pay.hotmart.com/V105408718W?checkoutMode=2" class="hotmart-fb hotmart__button-checkout" style="display: inline-block; background: #C49A1E; color: #0F0F0F; font-weight: 700; font-size: 1.05rem; padding: 0.85rem 2rem; border-radius: 4px; letter-spacing: 0.02em; text-decoration: none; cursor: pointer;">
     QUERO ENTENDER QUEM REALMENTE COMPRA DE MIM
-  </span>
+  </a>
 </div>
