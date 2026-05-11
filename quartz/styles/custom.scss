@@ -23,16 +23,7 @@ article {
   padding: 3rem 1.5rem;
 }
 
-// Força dark mode permanente — sobrescreve as variáveis de light mode
-:root {
-  color-scheme: dark;
-  --light: #161618;
-  --lightgray: #393639;
-  --gray: #646464;
-  --darkgray: #d4d4d4;
-  --dark: #ebebec;
-  --secondary: #7b97aa;
-  --tertiary: #84a59d;
-  --highlight: rgba(143, 159, 169, 0.15);
-  --textHighlight: #b3aa0288;
+// Oculta o botão do Darkmode (o script ainda carrega para forçar dark)
+.darkmode {
+  display: none !important;
 }
