@@ -13,7 +13,8 @@ const config: QuartzConfig = {
     enableSPA: true,
     enablePopovers: true,
     analytics: {
-      provider: "plausible",
+      provider: "clarity",
+      projectId: "wppn5ji1vi",
     },
     locale: "pt-BR",
     baseUrl: "glifomidia-sys.github.io/infoproduto",
