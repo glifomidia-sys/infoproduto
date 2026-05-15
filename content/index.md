@@ -22,9 +22,7 @@ fbq('track','PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2721607141573415&ev=PageView&noscript=1"/></noscript>
 
-## O problema do seu negócio talvez não seja tráfego.
-
-Talvez seja que você ainda não entendeu quem realmente compra de você.
+## A boa notícia é que o digital funciona, mas é preciso definir bem quem é que compraria de você.
 
 Existe uma frase muito comum no mercado:
 
