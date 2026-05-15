@@ -38,7 +38,7 @@ Enquanto você tenta descobrir "quem é seu avatar", seu cliente já está deixa
 
 O problema é que quase ninguém aprende a observar isso com atenção.
 
-![Métricas de conversão](/static/conversion-metrics.png)
+![Métricas de conversão](./assets/conversion-metrics.png)
 
 ---
 
